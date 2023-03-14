@@ -35,19 +35,6 @@ services:
       - app-db:/data/db
     #* Memakai volume bernama app-db dengan target /data/db di container.
 
-  volumes:
-    app-db:
+volumes:
+  app-db:
   #* Volume bernama app-db
-
-    driver: local
-    #* Menggunakan driver local.
-
-    driver_opts:
-      type: none
-      device: /home/70k0b0d0/app-db
-      o: bind
-    #* Menggunakan driver_opts untuk menentukan bahwa volume ini akan di-mount ke /home/70k0b0d0/app-db di host.
-
-    networks:
-      - app-network
-    #* Menentukan bahwa service ini akan berada di network bernama app-network.

@@ -2,9 +2,6 @@ FROM node:14
 #* Docker akan mengunduh/mengambil base image bernama node dari Docker Hub dengan tag 12-alpine. 
 #* Bila sudah pernah diunduh sebelumnya, Docker akan mengambil dari lokal.
 
-RUN mkdir -p /app
-#* membuat directory baru bernama app di dalam container
-
 WORKDIR /app
 #* membuat directory baru bernama app di dalam container dan menjadikannya sebagai working directory.
 
