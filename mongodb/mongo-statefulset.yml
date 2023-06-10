@@ -37,9 +37,9 @@ spec:
           #* Define the environment variables that the container should use
           env:
             - name: MONGO_INITDB_ROOT_USERNAME_FILE
-              value:/etc/mongo-credentials/MONGO_ROOT_USERNAME
+              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD_FILE
-              value:/etc/mongo-credentials/MONGO_ROOT_PASSWORD
+              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
           #* Define the ports that the container exposes
           ports:
             - containerPort: 27017
