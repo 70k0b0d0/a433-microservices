@@ -36,16 +36,10 @@ spec:
           imagePullPolicy: IfNotPresent
           #* Define the environment variables that the container should use
           env:
-            - name: MONGO_INITDB_ROOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: mongodb-username
-            - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: mongodb-password
+            - name: MONGO_INITDB_ROOT_USERNAME_FILE
+              value:/etc/mongo-credentials/MONGO_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+              value:/etc/mongo-credentials/MONGO_ROOT_PASSWORD
           #* Define the ports that the container exposes
           ports:
             - containerPort: 27017
@@ -53,8 +47,21 @@ spec:
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
+            - name: mongo-configmap
+              mountPath: /config
+            - name: mongo-secret
+              mountPath: /etc/mongo-credentials
       #* Define the volumes that the pod should use
       volumes:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
             claimName: mongo-pvc
+        - name: mongo-configmap
+          configMap:
+            name: mongo-configmap
+            items:
+              - key: mongo.conf
+                path: mongo.conf
+        - name: mongo-secret
+          secret:
+            secretName: mongo-secret
